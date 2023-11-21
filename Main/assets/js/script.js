@@ -92,16 +92,20 @@ var answers = [a1, a2, a3, a4, a5];
 //The startQuiz function is called when the user clicks the start button
 function startQuiz() {
   timerCount = 10;
+  isCorrect = false;
     showQuestions()
     startTimer()
    }
 
    function answerCorrect() {
-    correct++
+    correct++;
+    isCorrect = true;
    }
 
    function answerIncorrect() {
-    incorrect++
+    incorrect++;
+    isCorrect = false;
+    clearInterval(timer);
    }
 
    function startTimer() {
@@ -111,8 +115,7 @@ function startQuiz() {
         if (timerCount >= 0) {
             if (isCorrect && timerCount > 0) {
                 clearInterval(timer);
-                answerCorrect();
-            }
+                } 
         }
         if (timerCount === 0) {
             clearInterval(timer);
@@ -121,25 +124,32 @@ function startQuiz() {
     }, 1000);    
    }
 
-   function showQuestions() {
-    document.querySelector("#QuestionSelected").setAttribute("class", "show")
-    document.querySelector(".question").textContent = questions[questionNumber]
-    buttonEl1.textContent = options1[0];
+
     
+    function showQuestions() {
+        document.querySelector("#QuestionSelected").setAttribute("class", "show");
+        document.querySelector(".question").textContent = questions[questionNumber];
+        buttonEl1.textContent = options1.a;
+        buttonEl2.textContent = options1.b;
+        buttonEl3.textContent = options1.c;
+        buttonEl4.textContent = options1.d;
 
-    }
+        buttonEl1.addEventListener("click", answerIncorrect);
+        buttonEl2.addEventListener("click", answerCorrect);
+        buttonEl3.addEventListener("click", answerIncorrect);
+        buttonEl4.addEventListener("click", answerIncorrect);
+       
 
 
+       }
 
-
-
-
-
+    
 
 
 
 //starts quiz when start button clicked
 startButton.addEventListener("click", startQuiz);
+
 
 //init();
 
