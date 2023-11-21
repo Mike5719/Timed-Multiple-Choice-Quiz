@@ -14,6 +14,7 @@ var isCorrect = false;
 var timer;
 var timerCount;
 var questionNumber = 0;
+var optionCounter = 0;
 
 var h2Element = document.createElement("h2");
 
@@ -91,6 +92,7 @@ var answers = [a1, a2, a3, a4, a5];
 
 //The startQuiz function is called when the user clicks the start button
 function startQuiz() {
+    console.log(answers);
   timerCount = 10;
   isCorrect = false;
     showQuestions()
@@ -100,12 +102,18 @@ function startQuiz() {
    function answerCorrect() {
     correct++;
     isCorrect = true;
+    questionNumber++;
+    optionCounter++;
+    showQuestions()
+
    }
 
    function answerIncorrect() {
     incorrect++;
+    questionNumber++;
+    optionCounter++;
     isCorrect = false;
-    clearInterval(timer);
+    showQuestions()
    }
 
    function startTimer() {
@@ -129,10 +137,10 @@ function startQuiz() {
     function showQuestions() {
         document.querySelector("#QuestionSelected").setAttribute("class", "show");
         document.querySelector(".question").textContent = questions[questionNumber];
-        buttonEl1.textContent = options1.a;
-        buttonEl2.textContent = options1.b;
-        buttonEl3.textContent = options1.c;
-        buttonEl4.textContent = options1.d;
+        buttonEl1.textContent = options[optionCounter].a;
+        buttonEl2.textContent = options[optionCounter].b;
+        buttonEl3.textContent = options[optionCounter].c;
+        buttonEl4.textContent = options[optionCounter].d;
 
         buttonEl1.addEventListener("click", answerIncorrect);
         buttonEl2.addEventListener("click", answerCorrect);
