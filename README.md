@@ -19,7 +19,7 @@ THEN I can save my initials and score
 
 
 Credits:
-sample multiple choice questins with answers:
+Multiple choice questions used in quiz sourced from these sample questions with answers:
 https://www.w3schools.com/quiztest/quiztest.asp?qtest=JS
 
 Ask BCS:
