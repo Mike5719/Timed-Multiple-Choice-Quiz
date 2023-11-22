@@ -6,15 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
+
+
 <body>
     <header>
-        <div>JavaScript Fundamentals Multiple Choice Quiz</div>
+        <h1>JavaScript Fundamentals Multiple Choice Quiz</h1>
         <button id="start-button" class="visible">Start</button>
     </header>
 <main>
+    <!-- displays current question with associated option buttons-->
     <section id="QuestionSelected" class="hidden">
         
-            <h1 class="question"></h1>
+            <h2 class="question"></h2>
             <button id="one"></button>
             <button id="two"></button>
             <button id="three"></button>
@@ -22,15 +25,14 @@
     </section>
         
     
-
+    <!--displays the countdown timer-->
     <section id="timer-display" class="hidden">
-            <!--<h2>seconds remaining</h2>-->
-            <!--<div class = "timer-text"></div>-->
-            <div class="timer-count" 50 seconds remaining></div>
-           
+          <div class="timer-count" 50 seconds remaining></div>
     </section>
 
 </main>
+
+<!--when quiz completed, displays score and text box to enter and save initials-->
 <section id="QuizOver" class="scoreHidden">
     <div>
     <h3>All Done!</h3>
@@ -39,9 +41,8 @@
     <button id="save">SAVE,</button>
     </div>
 
-
 <div>
-    <h4>Highscores</h4>
+    <h3>Highscores</h3>
     <p>Initials: <span id="saved-initials"></span></p>
     <p>Score: <span id="saved-score"></span></span></p>
 </div>

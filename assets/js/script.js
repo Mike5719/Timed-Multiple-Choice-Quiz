@@ -2,15 +2,15 @@ var body = document.body;
 var startButton = document.querySelector("#start-button");
 var timerElement = document.querySelector("#timer-display");
 var multipleChoice = document.querySelector(".multiple-choice");
-var buttonEl1 = document.querySelector("#one");
-var buttonEl2 = document.querySelector("#two");
-var buttonEl3 = document.querySelector("#three");
-var buttonEl4 = document.querySelector("#four");
+var buttonEl1 = document.getElementById("one");
+var buttonEl2 = document.getElementById("two");
+var buttonEl3 = document.getElementById("three");
+var buttonEl4 = document.getElementById("four");
 var highscore = document.getElementById("saved-score");
 var initials = document.getElementById("initial");
 var saveButton = document.getElementById("save");
 
-//var h1Element = document.createElement("h1");
+
 var correct = 0;
 var incorrect = 0;
 var isCorrect = false;
@@ -18,21 +18,8 @@ var timer;
 var timerCount;
 var questionNumber = 0;
 var optionCounter = 0;
-var h2Element = document.createElement("h2");
+//var h2Element = document.createElement("h2");
 
-// create ordered list element
-var listElement = document.createElement("ol");
-
-// create ordered list items
-var li1 = document.createElement("li");
-var li2 = document.createElement("li");
-var li3 = document.createElement("li");
-var li4 = document.createElement("li");
-
-// Quiz title
-//h1Element.textContent = "JavaScript Fundamentals Multiple Choice Quiz";
-//body.appendChild(h1Element);
-//h1Element.setAttribute("style", "text-align:center;");
 
 // questions, answer options and question answers to be used in quiz
 var q1 = "Inside which HTML element do we put the Javascript?";
@@ -93,10 +80,6 @@ var a5 = options5["a"];
 
 var answers = [a1, a2, a3, a4, a5];
 
-//The init function is called when page loads
-//function init() {
- //   getScore();
-//}
 
 //The startQuiz function is called when the user clicks the start button
 function startQuiz() {
@@ -167,22 +150,19 @@ function startQuiz() {
    });
 
    function checkAnswer() {
-    if (buttonEl1 === options.Answer) {
+    if (buttonEl1.innerHTML === options[optionCounter].Answer) {
         answerCorrect();
-    }   else if (buttonEl2 === options.Answer) {
+    }   else if (buttonEl2.innerHTML === options[optionCounter].Answer) {
         answerCorrect();
-    }   else if (buttonEl3 === options.Answer) {
+    }   else if (buttonEl3.innerHTML === options[optionCounter].Answer) {
         answerCorrect();
-    }   else if (buttonEl4 === options.Answer) {
+    }   else if (buttonEl4.innerHTML === options[optionCounter].Answer) {
         answerCorrect();
     }   else {
        answerIncorrect();
     }
     }
 
-
-
-   
 
    function startTimer() {
     timer = setInterval(function() {
@@ -206,8 +186,7 @@ function startQuiz() {
    }
 
 
-    
-    function showQuestions() {
+     function showQuestions() {
         document.querySelector("#QuestionSelected").setAttribute("class", "show");
         document.querySelector("#start-button").setAttribute("class", "hidden");
         document.querySelector(".question").textContent = questions[questionNumber];
@@ -225,14 +204,10 @@ function startQuiz() {
 
     
 
-
-
 //starts quiz when start button clicked
 startButton.addEventListener("click", startQuiz);
 
 
-
-//init();
 
 
 

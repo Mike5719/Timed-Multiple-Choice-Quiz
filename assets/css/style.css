@@ -5,3 +5,15 @@
 .scoreHidden {
     display: none;
 }
+
+body {
+    background-color: bisque;
+}
+
+h1 {
+    color: black;
+}
+
+#QuestionSelected {
+    color:blue;
+}
