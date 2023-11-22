@@ -9,7 +9,7 @@
 <body>
     <header>
         <div>JavaScript Fundamentals Multiple Choice Quiz</div>
-        <button class="start-button">Start</button>
+        <button id="start-button" class="visible">Start</button>
     </header>
 <main>
     <section id="QuestionSelected" class="hidden">
@@ -23,15 +23,30 @@
         
     
 
-    <section>
-        <div class="timer">
-            <div class = "timer-text"></div>
-            <div class="timer-count">50</div>
-            <h3>seconds remaining</h3>
-        </div>
-
+    <section id="timer-display" class="hidden">
+            <!--<h2>seconds remaining</h2>-->
+            <!--<div class = "timer-text"></div>-->
+            <div class="timer-count" 50 seconds remaining></div>
+           
     </section>
-</main> 
+
+</main>
+<section id="QuizOver" class="scoreHidden">
+    <div>
+    <h3>All Done!</h3>
+    <label for="initial">Enter Initials:</label>
+    <textarea id="initial" name="enteredinitials"></textarea>
+    <button id="save">SAVE,</button>
+    </div>
+
+
+<div>
+    <h4>Highscores</h4>
+    <p>Initials: <span id="saved-initials"></span></p>
+    <p>Score: <span id="saved-score"></span></span></p>
+</div>
+</section>
+
     <script src ="./assets/js/script.js"></script>
 </body>
 </html>

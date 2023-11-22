@@ -1,11 +1,14 @@
 var body = document.body;
-var startButton = document.querySelector(".start-button");
-var timerElement = document.querySelector(".timer-count");
+var startButton = document.querySelector("#start-button");
+var timerElement = document.querySelector("#timer-display");
 var multipleChoice = document.querySelector(".multiple-choice");
 var buttonEl1 = document.querySelector("#one");
 var buttonEl2 = document.querySelector("#two");
 var buttonEl3 = document.querySelector("#three");
 var buttonEl4 = document.querySelector("#four");
+var highscore = document.getElementById("saved-score");
+var initials = document.getElementById("initial");
+var saveButton = document.getElementById("save");
 
 //var h1Element = document.createElement("h1");
 var correct = 0;
@@ -15,7 +18,6 @@ var timer;
 var timerCount;
 var questionNumber = 0;
 var optionCounter = 0;
-
 var h2Element = document.createElement("h2");
 
 // create ordered list element
@@ -45,34 +47,40 @@ var options1 = {
     a: "<js>",
     b: "<script>",
     c: "<javascript>",
-    d: "<scripting>"
+    d: "<scripting>",
+    Answer: "<script>"
 };
 
 var options2 = {
     a: "msgBox('Hello World');",
     b: "msg('Hello World');",
     c: "alert('Hello World');",
-    d: "alertBox('Hello World');"
+    d: "alertBox('Hello World');",
+    Answer: "alert('Hello World');"
 };
 
 var options3 = {
     a: "function = myFunction()",
     b: "function myFunction()",
-    c: "function:myFunction()"
+    c: "function:myFunction()",
+    d: "function::myFunction()",
+    Answer: "function myFunction()"
 };
 
 var options4 = {
     a: "if(i==5)",
     b: "if(i==5 then",
     c: "if i = 5 then",
-    d: "if i = 5"
+    d: "if i = 5",
+    Answer:"if(i==5)"
 }
 
 var options5 = {
     a: "for (i = 0; i <= 5; i++)",
     b: "for (i <= 5, i++)",
     c: "for (i =0; i <= 5)",
-    d: "for i = 1 to 5"
+    d: "for i = 1 to 5",
+    Answer: "for (i = 0; i <= 5; i++)"
 };
 
 var options = [options1, options2, options3, options4, options5];
@@ -93,40 +101,105 @@ var answers = [a1, a2, a3, a4, a5];
 //The startQuiz function is called when the user clicks the start button
 function startQuiz() {
     console.log(answers);
-  timerCount = 10;
+  timerCount = 50;
   isCorrect = false;
     showQuestions()
     startTimer()
    }
 
    function answerCorrect() {
+    if (questionNumber <= 3) {
     correct++;
     isCorrect = true;
     questionNumber++;
     optionCounter++;
     showQuestions()
-
-   }
+    } else {
+        document.querySelector("#QuestionSelected").setAttribute("class", "hidden");
+        document.querySelector("#QuizOver").setAttribute("class", "show");
+        clearInterval(timer);
+        document.querySelector("#timer-display").setAttribute("class", "hidden");
+        saveResults()
+        renderResults()
+    }
+}
 
    function answerIncorrect() {
+    if (questionNumber <= 3) {
     incorrect++;
     questionNumber++;
     optionCounter++;
     isCorrect = false;
     showQuestions()
+    } else {
+        document.querySelector("#QuestionSelected").setAttribute("class", "hidden");
+        document.querySelector("#QuizOver").setAttribute("class", "show");
+        clearInterval(timer);
+        document.querySelector("#timer-display").setAttribute("class", "hidden");
+        saveResults()
+        renderResults()
+    }
    }
+
+   function saveResults() {
+    var results = {
+        highscore: correct,
+        initials: initials.value.trim(),
+    };
+
+    localStorage.setItem('saveResults', JSON.stringify(saveResults));
+
+   }
+
+   function renderResults() {
+    var results = JSON.parse(localStorage.getItem('saveResults'));
+
+    if (results !== null){
+        document.getElementById('saved-initials').innerHTML = results.initials;
+        document.getElementById('saved-score').innerHTML = results.highscore;
+    }
+   }
+
+   saveButton.addEventListener('click', function (event) {
+    event.preventDefault();
+    saveResults();
+    renderResults();
+   });
+
+   function checkAnswer() {
+    if (buttonEl1 === options.Answer) {
+        answerCorrect();
+    }   else if (buttonEl2 === options.Answer) {
+        answerCorrect();
+    }   else if (buttonEl3 === options.Answer) {
+        answerCorrect();
+    }   else if (buttonEl4 === options.Answer) {
+        answerCorrect();
+    }   else {
+       answerIncorrect();
+    }
+    }
+
+
+
+   
 
    function startTimer() {
     timer = setInterval(function() {
+        document.querySelector("#timer-display").setAttribute("class", "show");
         timerCount--;
         timerElement.textContent = timerCount;
         if (timerCount >= 0) {
             if (isCorrect && timerCount > 0) {
                 clearInterval(timer);
+                document.querySelector("#timer-display").setAttribute("class", "hidden");
                 } 
         }
         if (timerCount === 0) {
             clearInterval(timer);
+            document.querySelector("#timer-display").setAttribute("class", "hidden");
+           
+            
             answerIncorrect();
         }
     }, 1000);    
@@ -136,20 +209,19 @@ function startQuiz() {
     
     function showQuestions() {
         document.querySelector("#QuestionSelected").setAttribute("class", "show");
+        document.querySelector("#start-button").setAttribute("class", "hidden");
         document.querySelector(".question").textContent = questions[questionNumber];
         buttonEl1.textContent = options[optionCounter].a;
         buttonEl2.textContent = options[optionCounter].b;
         buttonEl3.textContent = options[optionCounter].c;
         buttonEl4.textContent = options[optionCounter].d;
+    }
 
-        buttonEl1.addEventListener("click", answerIncorrect);
-        buttonEl2.addEventListener("click", answerCorrect);
-        buttonEl3.addEventListener("click", answerIncorrect);
-        buttonEl4.addEventListener("click", answerIncorrect);
+        buttonEl1.addEventListener("click", checkAnswer);
+        buttonEl2.addEventListener("click", checkAnswer);
+        buttonEl3.addEventListener("click", checkAnswer);
+        buttonEl4.addEventListener("click", checkAnswer);
        
-
-
-       }
 
     
 
@@ -157,6 +229,7 @@ function startQuiz() {
 
 //starts quiz when start button clicked
 startButton.addEventListener("click", startQuiz);
+
 
 
 //init();
