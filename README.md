@@ -14,3 +14,6 @@ assisted with cycling to next question with options
 
 TA Mark Alfan:
 Assisted with displaying first question after start button clicked
+
+ask BCS:
+assisted with line 191 in javascript to get the "seconds remaining" message to show next to the timer countdown

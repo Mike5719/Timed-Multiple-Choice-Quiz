@@ -130,6 +130,7 @@ function startQuiz() {
     questionNumber++;
     optionCounter++;
     isCorrect = false;
+    //timerCount = timerCount - 5; 
     showQuestions()
     } else {
         document.querySelector("#QuestionSelected").setAttribute("class", "hidden");
@@ -188,7 +189,7 @@ function startQuiz() {
     timer = setInterval(function() {
         document.querySelector("#timer-display").setAttribute("class", "show");
         timerCount--;
-        timerElement.textContent = timerCount;
+        timerElement.textContent = `${timerCount} seconds remaining`;
         if (timerCount >= 0) {
             if (isCorrect && timerCount > 0) {
                 clearInterval(timer);
