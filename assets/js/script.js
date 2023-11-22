@@ -148,12 +148,11 @@ function startQuiz() {
         initials: initials.value.trim(),
     };
 
-    localStorage.setItem('saveResults', JSON.stringify(saveResults));
-
-   }
+    localStorage.setItem('results', JSON.stringify(results));
+}
 
    function renderResults() {
-    var results = JSON.parse(localStorage.getItem('saveResults'));
+    results = JSON.parse(localStorage.getItem('results'));
 
     if (results !== null){
         document.getElementById('saved-initials').innerHTML = results.initials;
